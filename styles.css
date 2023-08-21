@@ -1,0 +1,122 @@
+body {
+	background-color: #202124;
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 0;
+	margin: 10px;
+	min-width: 232px;
+	max-width: 232px;
+}
+
+ul {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	flex-direction: column;
+	gap: 5px;
+	padding-left: 0;
+	min-width: 232px;
+	max-width: 232px;
+}
+
+
+li {
+	min-width: 90%;
+	max-width: 90%;
+	list-style-type: none;
+}
+
+.title {
+	color: white;
+	font-size: 17pt;
+	text-decoration: underline;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.instructions {
+	margin-top: 0;
+	margin-bottom: 5px;
+	text-align: center;
+	font-size: 11pt;
+	color: white;
+}
+
+.bigger {
+	font-size: 15pt;
+}
+
+.censorItem {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ctm-input {
+	max-width: 65%;
+	text-align: center;
+	border-radius: 15px 0 0 15px;
+	height: 20px;
+	border: none;
+	padding-left: 10px;
+	min-width: 70%;
+}
+
+.read-only-input {
+	-webkit-text-security: square;
+}
+
+.read-only-input:focus {
+	-webkit-text-security: none;
+}
+
+.censorInput:focus {
+	outline: none;
+}
+
+.ctm-button {
+	border-radius: 0 15px 15px 0;
+	border: none;
+	height: 22px;
+	min-width: 30%;
+	text-align: center;
+}
+
+.addCensor {
+	min-width: 90%;
+	max-width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.errorText {
+	text-align: center;
+	color: red;
+	font-size: 10pt;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.creditText {
+	font-size: 10pt;
+	color: white;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.heart {
+	color: red;
+	background-color: transparent;
+}
+
+.greenMark {
+	color: lightgreen;
+	background-color: transparent;
+}
+
+.sourceLink {
+	margin-top: -2px;
+}
