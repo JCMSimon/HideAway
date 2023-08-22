@@ -1,13 +1,15 @@
-const wordsToCensor = ["pastebin","test"];
-const censorSymbol = "[CENSORED BY HIDEAWAY]";
 
 function censorTextNode(textNode) {
-    let content = textNode.textContent;
-    wordsToCensor.forEach(word => {
-        const regex = new RegExp("\\b" + word + "\\b", "gi");
-        content = content.replace(regex, censorSymbol);
+    const censorSymbol = "*";
+    chrome.storage.sync.get(["HAList"], function(items) {
+        const wordsToCensor = items.HAList || [];
+        let content = textNode.textContent;
+        wordsToCensor.forEach(word => {
+            const regex = new RegExp("\\b" + word + "\\b", "gi");
+            content = content.replace(regex, censorSymbol.repeat(word.length));
+        });
+        textNode.textContent = content;
     });
-    textNode.textContent = content;
 }
 
 function observerCallback(mutationsList) {
@@ -32,4 +34,3 @@ textNodes.forEach(node => {
         censorTextNode(node);
     }
 });
-
