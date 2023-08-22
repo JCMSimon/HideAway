@@ -5,6 +5,11 @@
 	"manifest_version": 3,
 	"author": "JustCallMeSimon",
 	"permissions": ["activeTab","storage"],
+	"icons": {
+		"16": "16x16.png",
+		"48": "48x48.png",
+		"128": "128x128.png"
+	  },
 	"action": {
 		"default_popup": "popup.html",
 		"default_title": "HideAway"
