@@ -1,14 +1,17 @@
-
 function censorTextNode(textNode) {
     const censorSymbol = "*";
     chrome.storage.sync.get(["HAList"], function(items) {
         const wordsToCensor = items.HAList || [];
         let content = textNode.textContent;
+        // TODO | test if word is in the content first
         wordsToCensor.forEach(word => {
-            const regex = new RegExp("\\b" + word + "\\b", "gi");
-            content = content.replace(regex, censorSymbol.repeat(word.length));
+            if (content.toLowerCase().includes(word.toLowerCase())) {
+                // TODO | replace with regex that doesent only take full words
+                const regex = new RegExp("\\b" + word + "\\b", "gi");
+                content = content.replace(regex, censorSymbol.repeat(word.length));
+                textNode.textContent = content;
+            }
         });
-        textNode.textContent = content;
     });
 }
 
