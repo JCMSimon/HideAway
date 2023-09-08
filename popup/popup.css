@@ -50,7 +50,6 @@ li {
 .settingsIcon {
 	height: 30px;
 	aspect-ratio: 1;
-	position: absolute;
 	transition: 500ms;
 }
 
@@ -74,11 +73,18 @@ li {
 }
 
 .instructions {
+	position: sticky;
+	top: 0;
+	background-color: #202124;
+	width: 100%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 2%;
 	margin-top: 0;
 	margin-bottom: 5px;
-	text-align: center;
 	font-size: 11pt;
 	color: white;
+	text-align: center;
 }
 
 .bigger {
