@@ -43,18 +43,20 @@ li {
 }
 
 .settings {
-	height: 30px;
+	padding-top: 5px;
+	filter: invert();
+	height: 25px;
 	aspect-ratio: 1;
 }
 
 .settingsIcon {
-	height: 30px;
+	height: 25px;
 	aspect-ratio: 1;
 	transition: 500ms;
 }
 
 .settingsIcon:hover {
-	rotate: 360deg;
+	rotate: 90deg;
 }
 
 .scrollWrapper {

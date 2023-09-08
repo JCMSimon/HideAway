@@ -1,39 +1,76 @@
-function censorTextNode(textNode) {
+function observerCallback(mutationsList) {
+    debug = false
     const censorSymbol = "*";
     chrome.storage.sync.get(["HAList"], function(items) {
         const wordsToCensor = items.HAList || [];
-        let content = textNode.textContent;
-        // TODO | test if word is in the content first
-        wordsToCensor.forEach(word => {
-            if (content.toLowerCase().includes(word.toLowerCase())) {
-                // TODO | replace with regex that doesent only take full words
-                const regex = new RegExp("\\b" + word + "\\b", "gi");
-                content = content.replace(regex, censorSymbol.repeat(word.length));
-                textNode.textContent = content;
-            }
-        });
-    });
-}
+        for (const mutation of mutationsList) {
 
-function observerCallback(mutationsList) {
-    for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-            for (const addedNode of mutation.addedNodes) {
-                if (addedNode.nodeType === Node.TEXT_NODE) {
-                    censorTextNode(addedNode);
+            // Static Content
+            if (mutation.type === 'childList') {
+                for (const node of mutation.addedNodes) {
+                    if (node.nodeType === Node.TEXT_NODE || node.nodeType === Node.COMMENT_NODE || node.nodeType === Node.ATTRIBUTE_NODE || node.nodeType === Node.CDATA_SECTION_NODE) {
+                        let content = node.textContent;
+                        wordsToCensor.forEach(word => {
+                            if (content.toLowerCase().includes(word.toLowerCase())) {
+                                const regex = new RegExp("\\b" + word + "\\b", "gi");
+                                content = content.replace(regex, censorSymbol.repeat(word.length));
+                                    node.textContent = content;
+                                }
+                            }
+                            );
+                        }
+                    }
+            } else if (mutation.type === 'attributes') {
+                // Inner Text 2
+                if (String(mutation.target).split(" ")[1].slice(0,-1) === "HTMLParagraphElement") {
+                        let content = mutation.target.innerText;
+                        wordsToCensor.forEach(word => {
+                        if (content.toLowerCase().includes(word.toLowerCase())) {
+                                const regex = new RegExp("\\b" + word + "\\b", "gi");
+                                content = content.replace(regex, censorSymbol.repeat(word.length));
+                                mutation.target.innerText = content;
+                            }
+                        }
+                        );
+                // Alt text
+                } else if (String(mutation.target).split(" ")[1].slice(0,-1) === "HTMLImageElement") {
+                    let content = mutation.target.alt;
+                    wordsToCensor.forEach(word => {
+                    if (content.toLowerCase().includes(word.toLowerCase())) {
+                            const regex = new RegExp("\\b" + word + "\\b", "gi");
+                            content = content.replace(regex, censorSymbol.repeat(word.length));
+                            mutation.target.alt = content;
+                        }
+                    }
+                );
+                // innerText 2 ig
+                } else if (String(mutation.target).split(" ")[1].slice(0,-1) === "HTMLBodyElement" || String(mutation.target).split(" ")[1].slice(0,-1) === "HTMLHtmlElement") {
+                    // TODO | this stuff idk (react bullshit)
+                    continue
+
+                } else {
+                    if (debug == true) {
+                        console.log("FOUND " + String(mutation.target).split(" ")[1].slice(0,-1) + ", Content: " + mutation.target.innerText)
+                    }
                 }
-            }
+
+                // TODO | HTMLDivElement
+
+
+            } else if (mutation.type === 'characterData') {
+                if (debug == true) {
+                    console.log("HANDLE CHARDATA")
+                    console.log(mutation)
+                }
+
+            } else {
+                if (debug == true) {
+                    console.log("NEW TYPE: " + mutation.type)
+                }
         }
     }
 }
+)}
 
 const observer = new MutationObserver(observerCallback);
-observer.observe(document, { childList: true, subtree: true });
-
-// Censor the initial content
-const textNodes = document.querySelectorAll('body, body *');
-textNodes.forEach(node => {
-    if (node.nodeType === Node.TEXT_NODE) {
-        censorTextNode(node);
-    }
-});
+observer.observe(document, { childList: true, subtree: true, characterData: true, attributes: true, });
