@@ -10,18 +10,16 @@ body {
 	max-width: 232px;
 }
 
-
 ul {
 	display: flex;
 	align-items: center;
 	justify-items: center;
 	flex-direction: column;
-	gap: 10px;
+	gap: 12px;
 	padding-left: 0;
 	min-width: 232px;
 	max-width: 232px;
 }
-
 
 li {
 	min-width: 90%;
@@ -48,8 +46,8 @@ li {
 }
 
 ::-webkit-scrollbar {
-	width: 0;
 	opacity: 0;
+	width: 0;
 }
 
 .instructions {
@@ -88,6 +86,7 @@ li {
 	background-color: #202124;
 	outline: 1px solid white;
 	color: white;
+	cursor: not-allowed;
 }
 
 .read-only-input:focus {
@@ -105,6 +104,7 @@ li {
 	background-color: #202124;
 	outline: 1px solid white ;
 	color: white;
+	cursor: pointer;
 }
 
 .addCensor {
