@@ -1,10 +1,10 @@
 {
 	"name": "HideAway",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Simple Extension to hide any text on any website for more privacy while streaming / sharing your screen",
 	"manifest_version": 3,
 	"author": "JustCallMeSimon",
-	"permissions": ["activeTab","storage"],
+	"permissions": ["storage"],
 	"icons": {
 		"16": "16x16.png",
 		"48": "48x48.png",
@@ -19,6 +19,6 @@
             "matches": ["<all_urls>"],
             "js": ["replaceText.js"],
 			"run_at": "document_start"
-        }
+		}
     ]
 }
