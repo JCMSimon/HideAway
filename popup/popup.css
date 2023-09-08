@@ -30,6 +30,7 @@ li {
 .titleWrapper {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 12px;
 }
 
@@ -50,6 +51,11 @@ li {
 	height: 30px;
 	aspect-ratio: 1;
 	position: absolute;
+	transition: 500ms;
+}
+
+.settingsIcon:hover {
+	rotate: 360deg;
 }
 
 .scrollWrapper {
