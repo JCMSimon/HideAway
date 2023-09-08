@@ -10,27 +10,13 @@ body {
 	max-width: 232px;
 }
 
-.scrollWrapper {
-	overflow-y: scroll;
-	overflow-x: hidden;
-	max-height: 300px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	display: flex;
-	justify-content: center;
-}
-
-::-webkit-scrollbar {
-	width: 0;
-	opacity: 0;
-}
 
 ul {
 	display: flex;
 	align-items: center;
 	justify-items: center;
 	flex-direction: column;
-	gap: 5px;
+	gap: 10px;
 	padding-left: 0;
 	min-width: 232px;
 	max-width: 232px;
@@ -49,6 +35,21 @@ li {
 	text-decoration: underline;
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+.scrollWrapper {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-height: 300px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+::-webkit-scrollbar {
+	width: 0;
+	opacity: 0;
 }
 
 .instructions {
@@ -77,20 +78,21 @@ li {
 	border: none;
 	padding-left: 10px;
 	min-width: 70%;
+	color: white;
+	outline: 1px solid white;
+	background-color: #202124;
 }
 
 .read-only-input {
 	-webkit-text-security: square;
+	background-color: #202124;
+	outline: 1px solid white;
+	color: white;
 }
 
 .read-only-input:focus {
 	-webkit-text-security: none;
 	border: none;
-	outline: none;
-}
-
-.censorInput:focus {
-	outline: none;
 }
 
 .ctm-button {
@@ -100,6 +102,9 @@ li {
 	min-width: 30%;
 	text-align: center;
 	user-select: none;
+	background-color: #202124;
+	outline: 1px solid white ;
+	color: white;
 }
 
 .addCensor {
