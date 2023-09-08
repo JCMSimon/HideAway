@@ -1,28 +1,31 @@
 const errorText = document.getElementsByClassName("errorText")[0];
 
+// Build UI
 function update() {
 	chrome.storage.sync.get(["HAList"], function(items) {
-        const censorList = items.HAList || [];
+		// Get list of "to be censored words"
+		const censorList = items.HAList || [];
 		// Add list structure and help text
 		const HTMLList = document.getElementsByClassName("censorList")[0];
 		HTMLList.innerHTML = "";
 		placeholderItem = document.createElement("li");
 		placeholderItem.classList.add("instructions")
 		if (censorList.length == 0) {
-			placeholderItem.textContent = "Enter any text below and click add."
+			placeholderItem.textContent = "Enter any text below and click add. (Case insensitive)"
 		} else {
-			placeholderItem.textContent = "Click to reveal"
+			placeholderItem.textContent = "Click to reveal text"
 			placeholderItem.classList.add("bigger")
 		}
 		HTMLList.appendChild(placeholderItem)
 		// Add list entries
 		censorList.forEach((item,index) => {
+			// Generate list of censored words as ui elements
 			const li = document.createElement("li");
 			li.classList.add("censorItem")
 			const readOnlyInput = document.createElement("input");
 			readOnlyInput.type = "text";
 			readOnlyInput.className = "read-only-input ctm-input";
-			readOnlyInput.value = item;
+			readOnlyInput.value = item.toUpperCase();
 			readOnlyInput.readOnly = true;
 			const deleteButton = document.createElement("button");
 			deleteButton.classList.add("ctm-button")
@@ -39,35 +42,33 @@ function update() {
 	}
 )};
 
-
+// Handle adding words
 function handleButtonClick() {
     const inputElement = document.getElementsByClassName("censorInput")[0];
     const inputValue = inputElement.value;
 
-    console.log("Adding new word to list");
-
-    console.log("Getting current list");
+	// Get "to be censored words"
     chrome.storage.sync.get(["HAList"], function(result) {
-        const censorList = result.HAList || []; // Retrieve the list from the result object
-
-        if (inputValue.trim() !== "") {
-            if (!censorList.includes(inputValue.trim())) {
-                censorList.push(inputValue.trim());
-                chrome.storage.sync.set({ "HAList": censorList }, function() {
+        const censorList = result.HAList || [];
+        if (inputValue.toLowerCase().trim() !== "") {
+            if (!censorList.includes(inputValue.toLowerCase().trim())) {
+                censorList.push(inputValue.toLowerCase().trim());
+                // Add word to censor list
+				chrome.storage.sync.set({ "HAList": censorList }, function() {
                     // Callback function after data is successfully set
-                    inputElement.value = ""; // Clear the input field
+                    // Clear the input field
+					inputElement.value = "";
                     errorText.innerHTML = '<mark class="greenMark">Changes will take effect on reload</mark>';
-                    update(); // Make sure the update() function is defined and implemented
+                    update();
                 });
             } else {
-                errorText.textContent = `${inputValue.trim()} is already in the list.`;
+                errorText.textContent = `${inputValue.toLowerCase().trim()} is already in the list.`;
             }
         } else {
             errorText.textContent = "";
         }
     });
 }
-
 
 const saveButton = document.getElementsByClassName("saveButton")[0];
 saveButton.addEventListener("click", handleButtonClick);
