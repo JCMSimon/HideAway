@@ -27,12 +27,29 @@ li {
 	list-style-type: none;
 }
 
+.titleWrapper {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
 .title {
 	color: white;
 	font-size: 20pt;
 	text-decoration: underline;
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+.settings {
+	height: 30px;
+	aspect-ratio: 1;
+}
+
+.settingsIcon {
+	height: 30px;
+	aspect-ratio: 1;
+	position: absolute;
 }
 
 .scrollWrapper {
