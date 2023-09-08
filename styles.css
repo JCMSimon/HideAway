@@ -70,6 +70,8 @@ li {
 
 .read-only-input:focus {
 	-webkit-text-security: none;
+	border: none;
+	outline: none;
 }
 
 .censorInput:focus {
@@ -108,6 +110,7 @@ li {
 }
 
 .heart {
+	font-size: 9pt;
 	color: red;
 	background-color: transparent;
 }
