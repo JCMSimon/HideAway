@@ -60,20 +60,32 @@ li {
 }
 
 .scrollWrapper {
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	max-height: 300px;
-	margin-bottom: 10px;
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
 }
 
 ::-webkit-scrollbar {
-	opacity: 0;
-	width: 0;
+	width: 10px;
 }
 
+::-webkit-scrollbar-track {
+	border-radius: 8px;
+	background-color: #202124;
+	border: 2px solid white;
+	margin-top: 60px;
+	margin-bottom: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	background-color: #202124;
+	border: 2px solid white;
+}
+	
 .instructions {
 	position: sticky;
 	top: 0;

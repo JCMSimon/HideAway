@@ -11,9 +11,9 @@ function update() {
 		placeholderItem = document.createElement("li");
 		placeholderItem.classList.add("instructions")
 		if (censorList.length == 0) {
-			placeholderItem.textContent = "Enter any text below and click add. (Case insensitive)"
+			placeholderItem.textContent = "Enter any text (Case insensitive) below and click add."
 		} else {
-			placeholderItem.textContent = "Click to reveal text"
+			placeholderItem.textContent = "Click to reveal"
 			placeholderItem.classList.add("bigger")
 		}
 		HTMLList.appendChild(placeholderItem)
