@@ -44,7 +44,7 @@ function logAndAlterText(mutationsList, observer) {
     }
   });
 }
-  
+   
   // Create a MutationObserver to observe changes in the DOM
   const observer = new MutationObserver(logAndAlterText);
   const observerConfig = {
